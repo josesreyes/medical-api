@@ -1,4 +1,4 @@
-package com.jsrdev.medapi.common;
+package com.jsrdev.medapi.domain.model.physician;
 
 import java.text.Normalizer;
 import java.util.Arrays;

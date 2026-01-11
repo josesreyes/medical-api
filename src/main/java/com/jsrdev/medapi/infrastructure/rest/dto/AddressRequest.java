@@ -1,6 +1,6 @@
 package com.jsrdev.medapi.infrastructure.rest.dto;
 
-public record CreateAddressRequest(
+public record AddressRequest(
         String street,
         String stateOrProvince,
         String municipalityOrDelegation,
