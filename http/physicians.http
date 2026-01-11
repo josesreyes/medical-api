@@ -1,0 +1,42 @@
+@base = {{baseUrl}}/physicians
+
+### get physicians
+GET {{base}}
+Accept: application/json
+#  Authorization: Bearer {{token}}
+
+### Create physician
+POST {{base}}
+Content-Type: application/json
+
+{
+  "name": "Jsr 0009",
+  "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ22peP8ZGt5EBmLMUcgTmsWEIB7q-QnkMXSS7oz9rRwL1MM5KgtNsDbKQcYfE-UBiQOdI&usqp=CAU",
+  "email": "jsr0009@example.com",
+  "document": "100009",
+  "phoneNumber": "10000009",
+  "specialty": "CARDIOLOGY",
+  "address": {
+    "street": "street 1",
+    "stateOrProvince": "Mexico City",
+    "municipalityOrDelegation": "TLALPAN",
+    "city": "CDMX",
+    "zipCode": "10000",
+    "country": "Mexico",
+    "externalNumber": "1",
+    "internalNumber": "1",
+    "complement": "aaa"
+  }
+}
+
+### Update physician
+PUT {{base}}/1
+Content-Type: application/json
+
+{
+  "name": "José Sánchez",
+  "email": "jose.sanchez@example.com"
+}
+
+### Eliminar usuario
+DELETE {{base}}/1

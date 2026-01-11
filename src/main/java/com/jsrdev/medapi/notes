@@ -1,0 +1,23 @@
+HTTP Request
+  ↓
+Controller (forma + status)
+  ↓
+DTO → Mapper
+  ↓
+UseCase (reglas de negocio)
+  ↓
+Dominio (invariantes)
+  ↓
+Port (contrato)
+  ↓
+Adapter (infra)
+  ↓
+Repository (JPA)
+  ↓
+Mapper
+  ↓
+Dominio
+  ↓
+Controller
+  ↓
+HTTP Response
