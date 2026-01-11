@@ -1,5 +1,7 @@
 package com.jsrdev.medapi.domain.common;
 
+import com.jsrdev.medapi.domain.exception.InvalidPhysicianDataException;
+
 import java.util.regex.Pattern;
 
 public final class Email {
@@ -14,12 +16,9 @@ public final class Email {
     }
 
     public static Email of(String value) {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("Email cannot be blank");
-        }
-        if (!EMAIL_REGEX.matcher(value).matches()) {
-            throw new IllegalArgumentException("Invalid email format");
-        }
+        if (value == null || value.isBlank()) throw new InvalidPhysicianDataException("Email required");
+        if (!EMAIL_REGEX.matcher(value).matches()) throw new InvalidPhysicianDataException("Invalid email format");
+
         return new Email(value.toLowerCase());
     }
 
