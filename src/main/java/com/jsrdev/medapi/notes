@@ -21,3 +21,58 @@ Dominio
 Controller
   ↓
 HTTP Response
+
+
+
+########################################
+POST /physicians
+ ↓
+PhysicianController
+ ↓
+CreatePhysicianUseCase
+ ↓
+CreatePhysicianService
+ ↓
+PhysicianRepositoryPort
+ ↓
+PhysicianRepositoryAdapter
+ ↓
+JPA Repository
+ ↓
+MySQL
+
+
+#############################################
+Validations
+--------------------------------------
+| Capa          | Qué valida         |
+| ------------- | ------------------ |
+| DTO           | @NotBlank, @Email  |
+| Value Objects | formato real       |
+| Dominio       | invariantes        |
+| UseCase       | reglas del sistema |
+| Infra         | persistencia       |
+--------------------------------------
+
+o
+
+| Capa                | Valida                 | Ejemplo                            |
+| ------------------- | ---------------------- | ---------------------------------- |
+| Controller / DTO    | Forma de los datos     | campos vacíos, email string        |
+| Value Objects       | Formato + consistencia | email válido, phone válido         |
+| Dominio (Entity/VO) | Invariantes            | un Physician no puede ser inválido |
+| **Use Case**        | **Reglas de negocio**  | duplicados, permisos, límites      |
+| Infraestructura     | Integridad técnica     | DB constraints                     |
+
+
+cuando usar cada tipo de error:
+| Error                             | Cuándo ocurre               |
+| --------------------------------- | --------------------------- |
+| `MethodArgumentNotValidException` | DTO inválido (`@Valid`)     |
+| `HttpMessageNotReadableException` | JSON mal formado            |
+| `InvalidPhysicianDataException`   | Dominio inválido            |
+| `PhysicianAlreadyExistsException` | Regla de negocio            |
+| `EntityNotFoundException`         | Recurso no existe           |
+| `BadCredentialsException`         | Login incorrecto            |
+| `AccessDeniedException`           | Rol insuficiente            |
+| `Exception`                       | Error inesperado (fallback) |

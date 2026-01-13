@@ -39,4 +39,4 @@ Content-Type: application/json
 }
 
 ### Eliminar usuario
-DELETE {{base}}/1
+DELETE {{base}}/45454

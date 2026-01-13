@@ -4,7 +4,7 @@ import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.infrastructure.rest.dto.CreatePhysicianRequest;
 import com.jsrdev.medapi.infrastructure.rest.dto.PhysicianResponse;
 import com.jsrdev.medapi.infrastructure.rest.mapper.PhysicianDtoMapper;
-import com.jsrdev.medapi.usecase.physician.IPhysicianInteractor;
+import com.jsrdev.medapi.usecase.physician.create.CreatePhysicianUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PhysicianController {
 
-    private final IPhysicianInteractor physicianInteractor;
+    private final CreatePhysicianUseCase createPhysicianUseCase;
 
     @PostMapping
     public ResponseEntity<PhysicianResponse> create(
             @Valid @RequestBody CreatePhysicianRequest request) {
 
         Physician physician = PhysicianDtoMapper.fromPhysicianRequestToPhysician(request);
-        Physician created = physicianInteractor.createPhysician(physician);
+        Physician created = createPhysicianUseCase.execute(physician);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(PhysicianDtoMapper.fromPhysicianToPhysicianResponse(created));
     }
-
 }
+

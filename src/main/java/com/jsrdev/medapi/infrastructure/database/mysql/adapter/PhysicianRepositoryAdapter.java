@@ -32,6 +32,6 @@ public class PhysicianRepositoryAdapter implements PhysicianRepositoryPort {
 
     @Override
     public boolean existsByEmail(Email email) {
-        return false;
+        return physicianRepository.existsByEmail(email);
     }
 }

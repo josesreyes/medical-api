@@ -1,23 +1,27 @@
-package com.jsrdev.medapi.usecase.physician;
+package com.jsrdev.medapi.usecase.physician.create;
 
 import com.jsrdev.medapi.domain.exception.PhysicianAlreadyExistsException;
 import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.repository.PhysicianRepositoryPort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
-@Component
-public class PhysicianInteractorImpl implements IPhysicianInteractor {
+public class CreatePhysicianService implements CreatePhysicianUseCase {
 
     private final PhysicianRepositoryPort physicianRepository;
 
     @Override
-    public Physician createPhysician(Physician physician) {
+    public Physician execute(Physician physician) {
 
         if (physicianRepository.existsByEmail(physician.getEmail())) {
-            throw new PhysicianAlreadyExistsException("Physician with email " + physician.getEmail().value() + " already exists");
+            throw new PhysicianAlreadyExistsException(
+                    "Physician with email " + physician.getEmail().value() + " already exists"
+            );
         }
+
         return physicianRepository.create(physician);
     }
 }
+

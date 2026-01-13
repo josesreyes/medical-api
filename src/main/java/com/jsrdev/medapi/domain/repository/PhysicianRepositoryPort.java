@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PhysicianRepositoryPort {
+
     Physician create(Physician physician);
 
     Optional<Physician> findById(UUID id);
