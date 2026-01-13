@@ -5,4 +5,3 @@ public class InvalidPhysicianDataException extends DomainException {
         super(message);
     }
 }
-
