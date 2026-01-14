@@ -1,7 +1,7 @@
 @base = {{baseUrl}}/physicians
 
 ### get physicians
-GET {{base}}
+GET {{baseUrl}}/physicians
 Accept: application/json
 #  Authorization: Bearer {{token}}
 
