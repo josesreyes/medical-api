@@ -3,6 +3,7 @@ package com.jsrdev.medapi.infrastructure.rest.exception;
 import com.jsrdev.medapi.domain.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ValidationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -14,7 +15,7 @@ import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -153,13 +154,16 @@ public class GlobalExceptionHandler {
             Exception ex,
             HttpServletRequest request
     ) {
+        // Log completo para desarrolladores
+        log.error("Unexpected error at {}: {}", request.getRequestURI(), ex.getMessage(), ex);
+
         // Aquí SOLO log, nunca exponer el mensaje real
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                 new ApiError(
                         LocalDateTime.now(),
                         HttpStatus.INTERNAL_SERVER_ERROR.value(),
                         "INTERNAL_SERVER_ERROR",
-                        List.of(new FieldErrorValidation("", "Unexpected error occurred")),
+                        List.of(new FieldErrorValidation("", "Unexpected error occurred.")),
                         request.getRequestURI()
                 )
         );
