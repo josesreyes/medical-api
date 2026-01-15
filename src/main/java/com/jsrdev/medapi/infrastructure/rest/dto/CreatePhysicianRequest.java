@@ -2,13 +2,17 @@ package com.jsrdev.medapi.infrastructure.rest.dto;
 
 import com.jsrdev.medapi.domain.model.physician.Specialty;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 public record CreatePhysicianRequest(
         @NotBlank(message = "Name required")
+        @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", message = "Invalid format")
         String name,
+        @Size(max = 300)
+        @Pattern(
+                regexp = "^(https?:\\/\\/).+",
+                message = "Avatar must be a valid URL"
+        )
         String avatar,
         @Email(message = "Email invalid")
         @NotBlank(message = "Email required")
@@ -19,7 +23,7 @@ public record CreatePhysicianRequest(
         String phoneNumber,
         @NotNull(message = "Specialty required")
         Specialty specialty,
-        @Valid
+        @Valid @NotNull(message = "Address required")
         AddressRequest address
 ) {
 }

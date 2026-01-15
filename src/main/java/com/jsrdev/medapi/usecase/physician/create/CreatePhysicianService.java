@@ -5,6 +5,7 @@ import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.repository.PhysicianRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -12,6 +13,7 @@ public class CreatePhysicianService implements CreatePhysicianUseCase {
 
     private final PhysicianRepositoryPort physicianRepository;
 
+    @Transactional
     @Override
     public Physician execute(Physician physician) {
 

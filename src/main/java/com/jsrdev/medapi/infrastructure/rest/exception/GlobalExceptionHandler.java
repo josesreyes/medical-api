@@ -48,6 +48,9 @@ public class GlobalExceptionHandler {
             HttpMessageNotReadableException ex,
             HttpServletRequest request
     ) {
+        // Log completo para desarrolladores
+        log.error("Unexpected error at {}: {}", request.getRequestURI(), ex.getMessage(), ex);
+
         return ResponseEntity.badRequest().body(
                 new ApiError(
                         LocalDateTime.now(),

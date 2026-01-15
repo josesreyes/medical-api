@@ -6,6 +6,8 @@ import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.model.physician.Specialty;
 import com.jsrdev.medapi.infrastructure.rest.dto.CreatePhysicianRequest;
 import com.jsrdev.medapi.infrastructure.rest.dto.PhysicianResponse;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 
 public class PhysicianDtoMapper {
     public static PhysicianResponse fromPhysicianToPhysicianResponse(Physician physician) {
@@ -24,8 +26,8 @@ public class PhysicianDtoMapper {
     public static Physician fromPhysicianRequestToPhysician(CreatePhysicianRequest request) {
         return new Physician(
                 null,
-                request.name(),
-                request.avatar(),
+                Jsoup.clean(request.name(), Safelist.none()),
+                Jsoup.clean(request.avatar(), Safelist.none()),
                 Email.of(request.email()),
                 request.document(),
                 PhoneNumber.of(request.phoneNumber()),
