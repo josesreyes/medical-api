@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
@@ -20,8 +21,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class PhysicianEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue @UuidGenerator
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
     private String name;
     private String avatar;
@@ -29,6 +30,7 @@ public class PhysicianEntity {
     private Email email;
     private String document;
     @Convert(converter = PhoneNumberJpaConverter.class)
+    @Column(name = "phone_number")
     private PhoneNumber phoneNumber;
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
