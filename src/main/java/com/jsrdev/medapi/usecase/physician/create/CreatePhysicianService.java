@@ -24,15 +24,14 @@ public class CreatePhysicianService implements CreatePhysicianUseCase {
 
     private void ensurePhysicianDoesNotExist(Physician physician) {
         if (physicianRepository.existsByEmail(physician.getEmail())) {
-            throw new PhysicianAlreadyExistsException("Email already registered");
+            throw new PhysicianAlreadyExistsException("email", physician.getEmail().value());
         }
         if (physicianRepository.existsByDocument(physician.getDocument())) {
-            throw new PhysicianAlreadyExistsException("Document already registered");
+            throw new PhysicianAlreadyExistsException("document", physician.getDocument());
         }
         if (physicianRepository.existsByPhoneNumber(physician.getPhoneNumber())) {
-            throw new PhysicianAlreadyExistsException("Phone number already registered");
+            throw new PhysicianAlreadyExistsException("phoneNumber", physician.getPhoneNumber().value());
         }
     }
-
 }
 

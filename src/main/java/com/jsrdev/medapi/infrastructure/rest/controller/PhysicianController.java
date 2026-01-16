@@ -1,9 +1,9 @@
 package com.jsrdev.medapi.infrastructure.rest.controller;
 
 import com.jsrdev.medapi.domain.model.physician.Physician;
-import com.jsrdev.medapi.infrastructure.rest.dto.CreatePhysicianRequest;
-import com.jsrdev.medapi.infrastructure.rest.dto.PhysicianResponse;
-import com.jsrdev.medapi.infrastructure.rest.mapper.PhysicianDtoMapper;
+import com.jsrdev.medapi.infrastructure.rest.physician.CreatePhysicianRequest;
+import com.jsrdev.medapi.infrastructure.rest.physician.PhysicianResponse;
+import com.jsrdev.medapi.infrastructure.rest.physician.PhysicianDtoMapper;
 import com.jsrdev.medapi.usecase.physician.create.CreatePhysicianUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

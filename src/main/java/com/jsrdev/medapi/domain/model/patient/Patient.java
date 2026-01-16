@@ -1,4 +1,4 @@
-package com.jsrdev.medapi.domain.model.physician;
+package com.jsrdev.medapi.domain.model.patient;
 
 import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
@@ -7,24 +7,22 @@ import com.jsrdev.medapi.domain.model.address.Address;
 
 import java.util.UUID;
 
-public final class Physician {
+public final class Patient {
     UUID uuid;
     String name;
     String avatar;
     Email email;
-    String document;
+    String identityDocument;
     PhoneNumber phoneNumber;
-    Specialty specialty;
     Address address;
 
-    public Physician(
+    public Patient(
             UUID uuid,
             String name,
             String avatar,
             Email email,
             String document,
             PhoneNumber phoneNumber,
-            Specialty specialty,
             Address address
     ) {
         if (name == null || name.isBlank()) throw new InvalidPhysicianDataException("Name required");
@@ -35,9 +33,8 @@ public final class Physician {
         this.name = name;
         this.avatar = avatar;
         this.email = email;
-        this.document = document;
+        this.identityDocument = document;
         this.phoneNumber = phoneNumber;
-        this.specialty = specialty;
         this.address = address;
     }
 
@@ -57,16 +54,12 @@ public final class Physician {
         return email;
     }
 
-    public String getDocument() {
-        return document;
+    public String getIdentityDocument() {
+        return identityDocument;
     }
 
     public PhoneNumber getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public Specialty getSpecialty() {
-        return specialty;
     }
 
     public Address getAddress() {

@@ -1,9 +1,7 @@
 package com.jsrdev.medapi.domain.model.address;
 
 import com.jsrdev.medapi.domain.exception.InvalidAddressDataException;
-import lombok.Getter;
 
-@Getter
 public final class Address {
     String street;
     String stateOrProvince;
@@ -27,12 +25,15 @@ public final class Address {
             String complement
     ) {
         if (street == null || street.isBlank()) throw new InvalidAddressDataException("Street required");
-        if (stateOrProvince == null || stateOrProvince.isBlank()) throw new InvalidAddressDataException("State or province required");
-        if (municipalityOrDelegation == null || municipalityOrDelegation.isBlank()) throw new InvalidAddressDataException("Municipality or delegation required");
+        if (stateOrProvince == null || stateOrProvince.isBlank())
+            throw new InvalidAddressDataException("State or province required");
+        if (municipalityOrDelegation == null || municipalityOrDelegation.isBlank())
+            throw new InvalidAddressDataException("Municipality or delegation required");
         if (country == null || country.isBlank()) throw new InvalidAddressDataException("Country required");
         if (city == null || city.isBlank()) throw new InvalidAddressDataException("City required");
         if (zipCode == null) throw new InvalidAddressDataException("ZipCode required");
-        if (externalNumber == null || externalNumber.isBlank()) throw new InvalidAddressDataException("ExternalNumber required");
+        if (externalNumber == null || externalNumber.isBlank())
+            throw new InvalidAddressDataException("ExternalNumber required");
         if (complement == null || complement.isBlank()) throw new InvalidAddressDataException("Complement required");
 
         this.street = street;
@@ -44,5 +45,41 @@ public final class Address {
         this.externalNumber = externalNumber;
         this.internalNumber = internalNumber;
         this.complement = complement;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getStateOrProvince() {
+        return stateOrProvince;
+    }
+
+    public String getMunicipalityOrDelegation() {
+        return municipalityOrDelegation;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public String getExternalNumber() {
+        return externalNumber;
+    }
+
+    public String getInternalNumber() {
+        return internalNumber;
+    }
+
+    public String getComplement() {
+        return complement;
     }
 }

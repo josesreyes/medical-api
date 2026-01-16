@@ -1,8 +1,8 @@
 package com.jsrdev.medapi.domain.exception;
 
-public class PhysicianAlreadyExistsException extends ResourceAlreadyExistsException {
+public class PatientAlreadyExistsException extends ResourceAlreadyExistsException {
 
-    public PhysicianAlreadyExistsException(String field, String value) {
+    public PatientAlreadyExistsException(String field, String value) {
         super(
                 field,
                 value,

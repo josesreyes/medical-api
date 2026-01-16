@@ -1,7 +1,15 @@
 package com.jsrdev.medapi.domain.exception;
 
 public abstract class DomainException extends RuntimeException {
-    protected DomainException(String message) {
+
+    private final String code;
+
+    protected DomainException(String code, String message) {
         super(message);
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
     }
 }

@@ -1,10 +1,10 @@
-package com.jsrdev.medapi.infrastructure.rest.dto;
+package com.jsrdev.medapi.infrastructure.rest.patient;
 
-import com.jsrdev.medapi.domain.model.physician.Specialty;
+import com.jsrdev.medapi.infrastructure.rest.address.AddressRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
-public record CreatePhysicianRequest(
+public record CreatePatientRequest(
         @NotBlank(message = "Name required")
         @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", message = "Invalid format")
         String name,
@@ -17,16 +17,13 @@ public record CreatePhysicianRequest(
         @NotBlank(message = "Email required")
         String email,
 
-        @NotBlank(message = "Document required")
+        @NotBlank(message = "IdentityDocument required")
         @Pattern(regexp = "\\d{7,20}", message = "Invalid format")
-        String document,
+        String identityDocument,
 
         @NotBlank(message = "PhoneNumber required")
         @Pattern(regexp = "\\d{10,15}", message = "Invalid format")
         String phoneNumber,
-
-        @NotNull(message = "Specialty required")
-        Specialty specialty,
 
         @Valid @NotNull(message = "Address required")
         AddressRequest address

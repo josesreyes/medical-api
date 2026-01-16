@@ -1,4 +1,4 @@
-package com.jsrdev.medapi.infrastructure.rest.dto;
+package com.jsrdev.medapi.infrastructure.rest.address;
 
 public record AddressResponse(
         String street,
