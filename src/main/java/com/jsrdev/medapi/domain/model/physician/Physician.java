@@ -4,11 +4,9 @@ import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.domain.exception.InvalidPhysicianDataException;
 import com.jsrdev.medapi.domain.model.address.Address;
-import lombok.Getter;
 
 import java.util.UUID;
 
-@Getter
 public final class Physician {
     UUID uuid;
     String name;
@@ -41,5 +39,37 @@ public final class Physician {
         this.phoneNumber = phoneNumber;
         this.specialty = specialty;
         this.address = address;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public PhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Specialty getSpecialty() {
+        return specialty;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 }

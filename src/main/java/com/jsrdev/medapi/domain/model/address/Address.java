@@ -3,7 +3,6 @@ package com.jsrdev.medapi.domain.model.address;
 import com.jsrdev.medapi.domain.exception.InvalidAddressDataException;
 import lombok.Getter;
 
-@Getter
 public final class Address {
     String street;
     String stateOrProvince;
@@ -44,5 +43,41 @@ public final class Address {
         this.externalNumber = externalNumber;
         this.internalNumber = internalNumber;
         this.complement = complement;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getStateOrProvince() {
+        return stateOrProvince;
+    }
+
+    public String getMunicipalityOrDelegation() {
+        return municipalityOrDelegation;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public String getExternalNumber() {
+        return externalNumber;
+    }
+
+    public String getInternalNumber() {
+        return internalNumber;
+    }
+
+    public String getComplement() {
+        return complement;
     }
 }
