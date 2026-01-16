@@ -102,17 +102,22 @@ public class GlobalExceptionHandler {
     }
 
     /* ===================== 409 CONFLICT ===================== */
-    @ExceptionHandler(PhysicianAlreadyExistsException.class)
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
     public ResponseEntity<ApiError> handleConflict(
-            PhysicianAlreadyExistsException ex,
+            ResourceAlreadyExistsException ex,
             HttpServletRequest request
     ) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(
                 new ApiError(
                         LocalDateTime.now(),
                         HttpStatus.CONFLICT.value(),
-                        "PHYSICIAN_ALREADY_EXISTS",
-                        List.of(new FieldErrorValidation("email", ex.getMessage())),
+                        ex.getCode(),
+                        List.of(
+                                new FieldErrorValidation(
+                                        ex.getField(),
+                                        ex.getMessage()
+                                )
+                        ),
                         request.getRequestURI()
                 )
         );
