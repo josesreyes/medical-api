@@ -15,9 +15,9 @@ public class PhysicianDtoMapper {
                 physician.getUuid(),
                 physician.getName(),
                 physician.getAvatar(),
-                physician.getEmail(),
+                physician.getEmail().value(),
                 physician.getDocument(),
-                physician.getPhoneNumber(),
+                physician.getPhoneNumber().value(),
                 physician.getSpecialty(),
                 AddressDtoMapper.fromAddressToAddressResponse(physician.getAddress())
         );

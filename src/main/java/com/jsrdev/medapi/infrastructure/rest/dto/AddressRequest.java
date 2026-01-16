@@ -26,17 +26,17 @@ public record AddressRequest(
         String city,
 
         @NotNull(message = "ZipCode required")
-        Integer zipCode,
+        @Pattern(regexp = "\\d{4,8}", message = "Invalid format")
+        String zipCode,
 
         @NotBlank(message = "ExternalNumber required")
         @Pattern(regexp = "^[a-zA-Z0-9\\-]+$", message = "Invalid characters")
         String externalNumber,
 
-        @Pattern(regexp = "^[a-zA-Z0-9\\-]*$")
+        @Pattern(regexp = "^[a-zA-Z0-9\\-]+$", message = "Invalid characters")
         String internalNumber,
 
-        @NotBlank(message = "Complement required")
-        @Pattern(regexp = "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,#\\-\\s]+$")
+        @Pattern(regexp = "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,#\\-\\s]+$", message = "Invalid characters")
         String complement
 ) {
 }

@@ -1,6 +1,7 @@
 package com.jsrdev.medapi.infrastructure.database.mysql.adapter;
 
 import com.jsrdev.medapi.domain.common.Email;
+import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.repository.PhysicianRepositoryPort;
 import com.jsrdev.medapi.infrastructure.database.mysql.entity.PhysicianEntity;
@@ -33,5 +34,15 @@ public class PhysicianRepositoryAdapter implements PhysicianRepositoryPort {
     @Override
     public boolean existsByEmail(Email email) {
         return physicianRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByDocument(String document) {
+        return physicianRepository.existsByDocument(document);
+    }
+
+    @Override
+    public boolean existsByPhoneNumber(PhoneNumber phoneNumber) {
+        return physicianRepository.existsByPhoneNumber(phoneNumber);
     }
 }

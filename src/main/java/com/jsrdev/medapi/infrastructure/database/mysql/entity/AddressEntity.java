@@ -19,7 +19,7 @@ public class AddressEntity {
     private String country;
     private String city;
     @Column(name = "zip_code")
-    private Integer zipCode;
+    private String zipCode;
     @Column(name = "external_number")
     private String externalNumber;
     @Column(name = "internal_number")
