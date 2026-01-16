@@ -1,4 +1,4 @@
-package com.jsrdev.medapi.infrastructure.rest.dto;
+package com.jsrdev.medapi.infrastructure.rest.address;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

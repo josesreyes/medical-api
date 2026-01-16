@@ -1,11 +1,10 @@
-package com.jsrdev.medapi.infrastructure.rest.mapper;
+package com.jsrdev.medapi.infrastructure.rest.physician;
 
 import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.model.physician.Specialty;
-import com.jsrdev.medapi.infrastructure.rest.dto.CreatePhysicianRequest;
-import com.jsrdev.medapi.infrastructure.rest.dto.PhysicianResponse;
+import com.jsrdev.medapi.infrastructure.rest.address.AddressDtoMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 

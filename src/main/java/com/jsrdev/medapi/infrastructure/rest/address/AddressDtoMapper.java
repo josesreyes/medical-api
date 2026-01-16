@@ -1,8 +1,6 @@
-package com.jsrdev.medapi.infrastructure.rest.mapper;
+package com.jsrdev.medapi.infrastructure.rest.address;
 
 import com.jsrdev.medapi.domain.model.address.Address;
-import com.jsrdev.medapi.infrastructure.rest.dto.AddressRequest;
-import com.jsrdev.medapi.infrastructure.rest.dto.AddressResponse;
 
 public class AddressDtoMapper {
 

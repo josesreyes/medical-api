@@ -1,6 +1,7 @@
-package com.jsrdev.medapi.infrastructure.rest.dto;
+package com.jsrdev.medapi.infrastructure.rest.physician;
 
 import com.jsrdev.medapi.domain.model.physician.Specialty;
+import com.jsrdev.medapi.infrastructure.rest.address.AddressRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
