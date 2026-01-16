@@ -1,12 +1,10 @@
 CREATE TABLE physicians (
     id                         BINARY(16) NOT NULL,
-
     name                       VARCHAR(150) NOT NULL,
     avatar                     VARCHAR(500),
     email                      VARCHAR(200) NOT NULL UNIQUE,
     document                   VARCHAR(50)  NOT NULL UNIQUE,
-    phone_number               VARCHAR(30)  NOT NULL,
-
+    phone_number               VARCHAR(30)  NOT NULL UNIQUE,
     specialty                  VARCHAR(50)  NOT NULL,
 
     -- Address (Embedded)

@@ -6,7 +6,7 @@ public record AddressResponse(
         String municipalityOrDelegation,
         String country,
         String city,
-        Integer zipCode,
+        String zipCode,
         String externalNumber,
         String internalNumber,
         String complement

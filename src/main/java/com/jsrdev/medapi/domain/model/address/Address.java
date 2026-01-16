@@ -10,7 +10,7 @@ public final class Address {
     String municipalityOrDelegation;
     String country;
     String city;
-    Integer zipCode;
+    String zipCode;
     String externalNumber;
     String internalNumber;
     String complement;
@@ -21,7 +21,7 @@ public final class Address {
             String municipalityOrDelegation,
             String country,
             String city,
-            Integer zipCode,
+            String zipCode,
             String externalNumber,
             String internalNumber,
             String complement
