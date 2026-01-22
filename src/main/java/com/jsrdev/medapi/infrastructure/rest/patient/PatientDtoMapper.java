@@ -17,6 +17,7 @@ public class PatientDtoMapper {
                 Email.of(request.email()),
                 request.identityDocument(),
                 PhoneNumber.of(request.phoneNumber()),
+                null,
                 AddressDtoMapper.fromAddresDtoToAddress(request.address())
         );
     }

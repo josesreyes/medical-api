@@ -13,6 +13,7 @@ public class PatientMapper {
                 patient.getEmail(),
                 patient.getIdentityDocument(),
                 patient.getPhoneNumber(),
+                true,
                 AddressMapper.fromAddressToAddressEntity(patient.getAddress())
         );
     }
@@ -25,6 +26,7 @@ public class PatientMapper {
                 entity.getEmail(),
                 entity.getIdentityDocument(),
                 entity.getPhoneNumber(),
+                entity.getIsActive(),
                 AddressMapper.fromAddressEntityToAddress(entity.getAddress())
         );
     }
