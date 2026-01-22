@@ -14,6 +14,7 @@ public final class Patient {
     Email email;
     String identityDocument;
     PhoneNumber phoneNumber;
+    Boolean isActive;
     Address address;
 
     public Patient(
@@ -23,6 +24,7 @@ public final class Patient {
             Email email,
             String document,
             PhoneNumber phoneNumber,
+            Boolean isActive,
             Address address
     ) {
         if (name == null || name.isBlank()) throw new InvalidPhysicianDataException("Name required");
@@ -35,6 +37,7 @@ public final class Patient {
         this.email = email;
         this.identityDocument = document;
         this.phoneNumber = phoneNumber;
+        this.isActive = isActive;
         this.address = address;
     }
 

@@ -34,6 +34,8 @@ public class PatientEntity {
     @Convert(converter = PhoneNumberJpaConverter.class)
     @Column(name = "phone_number")
     private PhoneNumber phoneNumber;
+    @Column(name = "is_active")
+    private Boolean isActive;
     @Embedded
     private AddressEntity address;
 }
