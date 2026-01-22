@@ -31,6 +31,7 @@ public class PhysicianDtoMapper {
                 request.document(),
                 PhoneNumber.of(request.phoneNumber()),
                 Specialty.parseSpecialty(String.valueOf(request.specialty())),
+                null,
                 AddressDtoMapper.fromAddresDtoToAddress(request.address())
         );
     }

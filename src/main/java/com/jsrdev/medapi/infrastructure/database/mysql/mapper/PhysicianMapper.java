@@ -14,6 +14,7 @@ public class PhysicianMapper {
                 physician.getDocument(),
                 physician.getPhoneNumber(),
                 physician.getSpecialty(),
+                true,
                 AddressMapper.fromAddressToAddressEntity(physician.getAddress())
         );
     }
@@ -27,6 +28,7 @@ public class PhysicianMapper {
                 physicianEntity.getDocument(),
                 physicianEntity.getPhoneNumber(),
                 physicianEntity.getSpecialty(),
+                physicianEntity.getIsActive(),
                 AddressMapper.fromAddressEntityToAddress(physicianEntity.getAddress())
         );
     }
