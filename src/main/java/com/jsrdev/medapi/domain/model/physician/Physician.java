@@ -15,6 +15,7 @@ public final class Physician {
     String document;
     PhoneNumber phoneNumber;
     Specialty specialty;
+    Boolean  isActive;
     Address address;
 
     public Physician(
@@ -25,6 +26,7 @@ public final class Physician {
             String document,
             PhoneNumber phoneNumber,
             Specialty specialty,
+            Boolean isActive,
             Address address
     ) {
         if (name == null || name.isBlank()) throw new InvalidPhysicianDataException("Name required");
@@ -38,6 +40,7 @@ public final class Physician {
         this.document = document;
         this.phoneNumber = phoneNumber;
         this.specialty = specialty;
+        this.isActive = isActive;
         this.address = address;
     }
 

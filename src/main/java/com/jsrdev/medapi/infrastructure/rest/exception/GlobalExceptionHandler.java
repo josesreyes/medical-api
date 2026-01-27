@@ -67,7 +67,8 @@ public class GlobalExceptionHandler {
             InvalidPhysicianDataException.class,
             InvalidAddressDataException.class,
             ValidationException.class,
-            IntegrityValidationException.class
+            IntegrityValidationException.class,
+            ValidationException.class
     })
     public ResponseEntity<ApiError> handleBusinessValidation(
             RuntimeException ex,

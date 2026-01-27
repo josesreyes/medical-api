@@ -1,15 +1,16 @@
-package com.jsrdev.medapi.usecase.physician.create;
+package com.jsrdev.medapi.usecase.physician.imp;
 
 import com.jsrdev.medapi.domain.exception.PhysicianAlreadyExistsException;
 import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.repository.PhysicianRepositoryPort;
+import com.jsrdev.medapi.usecase.physician.CreatePhysician;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CreatePhysicianService implements CreatePhysicianUseCase {
+public class CreatePhysicianInteractor implements CreatePhysician {
 
     private final PhysicianRepositoryPort physicianRepository;
 
@@ -33,5 +34,7 @@ public class CreatePhysicianService implements CreatePhysicianUseCase {
             throw new PhysicianAlreadyExistsException("phoneNumber", physician.getPhoneNumber().value());
         }
     }
+
+
 }
 
