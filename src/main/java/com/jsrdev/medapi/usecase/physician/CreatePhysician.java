@@ -1,8 +1,8 @@
-package com.jsrdev.medapi.usecase.physician.create;
+package com.jsrdev.medapi.usecase.physician;
 
 import com.jsrdev.medapi.domain.model.physician.Physician;
 
-public interface CreatePhysicianUseCase {
+public interface CreatePhysician {
     Physician execute(Physician physician);
 }
 
