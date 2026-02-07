@@ -8,7 +8,12 @@ import com.jsrdev.medapi.infrastructure.database.mysql.entity.PatientEntity;
 import com.jsrdev.medapi.infrastructure.database.mysql.mapper.PatientMapper;
 import com.jsrdev.medapi.infrastructure.database.mysql.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -35,5 +40,17 @@ public class PatientRepositoryAdapter implements PatientRepositoryPort {
     @Override
     public boolean existsByPhoneNumber(PhoneNumber phoneNumber) {
         return patientRepository.existsByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public Page<Patient> findActivePatients(Pageable pageable) {
+        return patientRepository.findByIsActiveTrue(pageable)
+                .map(PatientMapper::fromPatientEntityToPatient);
+    }
+
+    @Override
+    public Optional<Patient> findById(UUID id) {
+        return patientRepository.findByIdAndIsActiveTrue(id)
+                .map(PatientMapper::fromPatientEntityToPatient);
     }
 }

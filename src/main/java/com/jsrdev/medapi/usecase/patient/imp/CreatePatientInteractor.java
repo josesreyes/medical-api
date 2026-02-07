@@ -1,15 +1,16 @@
-package com.jsrdev.medapi.usecase.patient.create;
+package com.jsrdev.medapi.usecase.patient.imp;
 
 import com.jsrdev.medapi.domain.exception.PatientAlreadyExistsException;
 import com.jsrdev.medapi.domain.model.patient.Patient;
 import com.jsrdev.medapi.domain.repository.PatientRepositoryPort;
+import com.jsrdev.medapi.usecase.patient.CreatePatient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CreatePatientService implements CreatePatientUseCase {
+public class CreatePatientInteractor implements CreatePatient {
 
     private final PatientRepositoryPort patientRepositoryPort;
 

@@ -3,8 +3,11 @@ package com.jsrdev.medapi.infrastructure.database.mysql.repository;
 import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.infrastructure.database.mysql.entity.PatientEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PatientRepository extends JpaRepository<PatientEntity, UUID> {
@@ -13,4 +16,8 @@ public interface PatientRepository extends JpaRepository<PatientEntity, UUID> {
     boolean existsByIdentityDocument(String identityDocument);
 
     boolean existsByPhoneNumber(PhoneNumber phoneNumber);
+
+    Page<PatientEntity> findByIsActiveTrue(Pageable pageable);
+
+    Optional<PatientEntity> findByIdAndIsActiveTrue(UUID id);
 }
