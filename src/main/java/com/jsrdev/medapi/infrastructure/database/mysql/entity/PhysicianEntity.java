@@ -21,7 +21,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class PhysicianEntity {
-    @Id @GeneratedValue @UuidGenerator
+    @Id
+    @GeneratedValue
+    @UuidGenerator
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
     private String name;
@@ -38,4 +40,36 @@ public class PhysicianEntity {
     private Boolean isActive;
     @Embedded
     private AddressEntity address;
+
+    public void update(
+            String name,
+            String avatar,
+            PhoneNumber phoneNumber,
+            String street,
+            String stateOrProvince,
+            String municipalityOrDelegation,
+            String country,
+            String city,
+            String zipCode,
+            String externalNumber,
+            String internalNumber,
+            String complement
+    ) {
+        if (name != null) this.name = name;
+        if (avatar != null) this.avatar = avatar;
+        if (phoneNumber != null) this.phoneNumber = phoneNumber;
+        if (address != null) {
+            this.address.update(
+                    street,
+                    stateOrProvince,
+                    municipalityOrDelegation,
+                    country,
+                    city,
+                    zipCode,
+                    externalNumber,
+                    internalNumber,
+                    complement
+            );
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.jsrdev.medapi.infrastructure.database.mysql.adapter;
 
 import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
+import com.jsrdev.medapi.domain.exception.EntityNotFoundException;
 import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.repository.PhysicianRepositoryPort;
 import com.jsrdev.medapi.infrastructure.database.mysql.entity.PhysicianEntity;
@@ -30,7 +31,8 @@ public class PhysicianRepositoryAdapter implements PhysicianRepositoryPort {
 
     @Override
     public Optional<Physician> findById(UUID id) {
-        return Optional.empty();
+        return physicianRepository.findById(id)
+                .map(PhysicianMapper::fromPhysicianEntityToPhysician);
     }
 
     @Override
@@ -52,5 +54,37 @@ public class PhysicianRepositoryAdapter implements PhysicianRepositoryPort {
     public Page<Physician> findActivePhysicians(Pageable pageable) {
         return physicianRepository.findByIsActiveTrue(pageable)
                 .map(PhysicianMapper::fromPhysicianEntityToPhysician);
+    }
+
+    @Override
+    public Physician update(Physician physician) {
+
+        PhysicianEntity entity = physicianRepository.findById(physician.getUuid())
+                        .orElseThrow(() -> new EntityNotFoundException("Physician not found"));
+
+        mapDomainToExistingEntity(physician, entity);
+
+        return PhysicianMapper.fromPhysicianEntityToPhysician(entity);
+    }
+
+    private void mapDomainToExistingEntity(
+            Physician domain,
+            PhysicianEntity entity
+    ) {
+        entity.update(
+                domain.getName(),
+                domain.getAvatar(),
+                domain.getPhoneNumber(),
+                domain.getAddress().getStreet(),
+                domain.getAddress().getStateOrProvince(),
+                domain.getAddress().getMunicipalityOrDelegation(),
+                domain.getAddress().getCountry(),
+                domain.getAddress().getCity(),
+                domain.getAddress().getZipCode(),
+                domain.getAddress().getExternalNumber(),
+                domain.getAddress().getInternalNumber(),
+                domain.getAddress().getComplement()
+
+        );
     }
 }

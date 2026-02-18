@@ -4,8 +4,10 @@ import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.infrastructure.rest.physician.CreatePhysicianRequest;
 import com.jsrdev.medapi.infrastructure.rest.physician.PhysicianDtoMapper;
 import com.jsrdev.medapi.infrastructure.rest.physician.PhysicianResponse;
+import com.jsrdev.medapi.infrastructure.rest.physician.UpdatePhysicianRequest;
 import com.jsrdev.medapi.usecase.physician.CreatePhysician;
 import com.jsrdev.medapi.usecase.physician.GetActivePhysicians;
+import com.jsrdev.medapi.usecase.physician.UpdatePhysician;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,7 @@ public class PhysicianController {
 
     private final CreatePhysician createPhysician;
     private final GetActivePhysicians getActivePhysicians;
+    private final UpdatePhysician updatePhysician;
 
     @PostMapping
     public ResponseEntity<PhysicianResponse> create(
@@ -52,6 +55,13 @@ public class PhysicianController {
         PhysicianResponse physicianResponse = PhysicianDtoMapper.fromPhysicianToPhysicianResponse(physician);
 
         return ResponseEntity.ok(physicianResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PhysicianResponse> updatePhysician(@PathVariable UUID id, @Valid @RequestBody UpdatePhysicianRequest updateRequest) {
+        var physician = updatePhysician.execute(id, updateRequest);
+
+        return ResponseEntity.ok(PhysicianDtoMapper.fromPhysicianToPhysicianResponse(physician));
     }
 }
 

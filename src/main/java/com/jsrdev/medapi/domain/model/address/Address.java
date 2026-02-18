@@ -1,6 +1,7 @@
 package com.jsrdev.medapi.domain.model.address;
 
 import com.jsrdev.medapi.domain.exception.InvalidAddressDataException;
+import com.jsrdev.medapi.infrastructure.rest.address.AddressRequest;
 
 public final class Address {
     String street;
@@ -81,5 +82,18 @@ public final class Address {
 
     public String getComplement() {
         return complement;
+    }
+
+    public void update(AddressRequest update) {
+        if (update.street() != null) this.street = update.street();
+        if (update.stateOrProvince() != null) this.stateOrProvince = update.stateOrProvince();
+        if (update.municipalityOrDelegation() != null)
+            this.municipalityOrDelegation = update.municipalityOrDelegation();
+        if (update.city() != null) this.city = update.city();
+        if (update.zipCode() != null) this.zipCode = update.zipCode();
+        if (update.country() != null) this.country = update.country();
+        if (update.externalNumber() != null) this.externalNumber = update.externalNumber();
+        if (update.internalNumber() != null) this.internalNumber = update.internalNumber();
+        if (update.complement() != null) this.complement = update.complement();
     }
 }

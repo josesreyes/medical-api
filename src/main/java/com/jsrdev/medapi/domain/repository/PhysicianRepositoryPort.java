@@ -22,4 +22,6 @@ public interface PhysicianRepositoryPort {
     boolean existsByPhoneNumber(PhoneNumber phoneNumber);
 
     Page<Physician> findActivePhysicians(Pageable pageable);
+
+    Physician update(Physician physician);
 }
