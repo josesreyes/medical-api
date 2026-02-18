@@ -4,6 +4,7 @@ import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.domain.exception.InvalidPhysicianDataException;
 import com.jsrdev.medapi.domain.model.address.Address;
+import com.jsrdev.medapi.infrastructure.rest.physician.UpdatePhysicianRequest;
 
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ public final class Physician {
     String document;
     PhoneNumber phoneNumber;
     Specialty specialty;
-    Boolean  isActive;
+    Boolean isActive;
     Address address;
 
     public Physician(
@@ -72,7 +73,20 @@ public final class Physician {
         return specialty;
     }
 
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
     public Address getAddress() {
         return address;
+    }
+
+    public void update(UpdatePhysicianRequest update) {
+        if (update.name() != null) this.name = update.name();
+        if (update.avatar() != null) this.avatar = update.avatar();
+        if (update.phoneNumber() != null) this.phoneNumber = PhoneNumber.of(update.phoneNumber());
+        if (update.address() != null) {
+            this.address.update(update.address());
+        }
     }
 }
