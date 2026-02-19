@@ -1,6 +1,6 @@
 package com.jsrdev.medapi.infrastructure.rest.physician;
 
-import com.jsrdev.medapi.infrastructure.rest.address.AddressRequest;
+import com.jsrdev.medapi.infrastructure.rest.address.UpdateAddressRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -17,6 +17,6 @@ public record UpdatePhysicianRequest(
         String phoneNumber,
 
         @Valid
-        AddressRequest address
+        UpdateAddressRequest address
 ) {
 }

@@ -25,6 +25,7 @@ public class PhysicianController {
     private final CreatePhysician createPhysician;
     private final GetActivePhysicians getActivePhysicians;
     private final UpdatePhysician updatePhysician;
+    //private final DeletePhysician deletePhysician;
 
     @PostMapping
     public ResponseEntity<PhysicianResponse> create(
@@ -60,8 +61,13 @@ public class PhysicianController {
     @PutMapping("/{id}")
     public ResponseEntity<PhysicianResponse> updatePhysician(@PathVariable UUID id, @Valid @RequestBody UpdatePhysicianRequest updateRequest) {
         var physician = updatePhysician.execute(id, updateRequest);
-
         return ResponseEntity.ok(PhysicianDtoMapper.fromPhysicianToPhysicianResponse(physician));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePhysician(@PathVariable UUID id) {
+        //var physician = deletePhysician.execute(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
