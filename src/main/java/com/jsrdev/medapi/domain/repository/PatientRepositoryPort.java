@@ -21,4 +21,6 @@ public interface PatientRepositoryPort {
     Page<Patient> findActivePatients(Pageable pageable);
 
     Optional<Patient> findById(UUID id);
+
+    Patient update(Patient patient);
 }
