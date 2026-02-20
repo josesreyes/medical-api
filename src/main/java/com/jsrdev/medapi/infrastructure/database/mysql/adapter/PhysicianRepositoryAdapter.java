@@ -76,7 +76,7 @@ public class PhysicianRepositoryAdapter implements PhysicianRepositoryPort {
         entity.setName(domain.getName());
         entity.setAvatar(domain.getAvatar());
         entity.setPhoneNumber(domain.getPhoneNumber());
-
+        entity.setIsActive(domain.getIsActive());
         // update address
         mapAddress(domain.getAddress(), entity.getAddress());
     }

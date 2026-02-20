@@ -6,6 +6,7 @@ import com.jsrdev.medapi.infrastructure.rest.physician.PhysicianDtoMapper;
 import com.jsrdev.medapi.infrastructure.rest.physician.PhysicianResponse;
 import com.jsrdev.medapi.infrastructure.rest.physician.UpdatePhysicianRequest;
 import com.jsrdev.medapi.usecase.physician.CreatePhysician;
+import com.jsrdev.medapi.usecase.physician.DeactivatePhysician;
 import com.jsrdev.medapi.usecase.physician.GetActivePhysicians;
 import com.jsrdev.medapi.usecase.physician.UpdatePhysician;
 import jakarta.validation.Valid;
@@ -25,7 +26,7 @@ public class PhysicianController {
     private final CreatePhysician createPhysician;
     private final GetActivePhysicians getActivePhysicians;
     private final UpdatePhysician updatePhysician;
-    //private final DeletePhysician deletePhysician;
+    private final DeactivatePhysician deactivatePhysician;
 
     @PostMapping
     public ResponseEntity<PhysicianResponse> create(
@@ -65,8 +66,8 @@ public class PhysicianController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePhysician(@PathVariable UUID id) {
-        //var physician = deletePhysician.execute(id);
+    public ResponseEntity<Void> deactivatePhysician(@PathVariable UUID id) {
+        deactivatePhysician.execute(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -4,6 +4,7 @@ import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.domain.exception.InvalidPhysicianDataException;
 import com.jsrdev.medapi.domain.model.address.Address;
+import jakarta.validation.ValidationException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,4 +51,16 @@ public final class Physician {
         this.address = address;
     }
 
+    public void deactivate() {
+        this.isActive = false;
+    }
+
+    public void activate() {
+        if (isActive /*== PhysicianStatus.ACTIVE*/) {
+            throw new ValidationException("Already active");
+        }
+
+        this.isActive = true;
+        //this.status = PhysicianStatus.ACTIVE;
+    }
 }

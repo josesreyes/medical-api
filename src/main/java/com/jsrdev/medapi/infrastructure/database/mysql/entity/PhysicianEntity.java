@@ -36,9 +36,9 @@ public class PhysicianEntity {
     private PhoneNumber phoneNumber;
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
+    @Setter
     @Column(name = "is_active")
     private Boolean isActive;
     @Embedded
     private AddressEntity address;
-
 }
