@@ -3,8 +3,10 @@ package com.jsrdev.medapi.infrastructure.database.mysql.adapter;
 import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.domain.exception.EntityNotFoundException;
+import com.jsrdev.medapi.domain.model.address.Address;
 import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.repository.PhysicianRepositoryPort;
+import com.jsrdev.medapi.infrastructure.database.mysql.entity.AddressEntity;
 import com.jsrdev.medapi.infrastructure.database.mysql.entity.PhysicianEntity;
 import com.jsrdev.medapi.infrastructure.database.mysql.mapper.PhysicianMapper;
 import com.jsrdev.medapi.infrastructure.database.mysql.repository.PhysicianRepository;
@@ -71,20 +73,23 @@ public class PhysicianRepositoryAdapter implements PhysicianRepositoryPort {
             Physician domain,
             PhysicianEntity entity
     ) {
-        entity.update(
-                domain.getName(),
-                domain.getAvatar(),
-                domain.getPhoneNumber(),
-                domain.getAddress().getStreet(),
-                domain.getAddress().getStateOrProvince(),
-                domain.getAddress().getMunicipalityOrDelegation(),
-                domain.getAddress().getCountry(),
-                domain.getAddress().getCity(),
-                domain.getAddress().getZipCode(),
-                domain.getAddress().getExternalNumber(),
-                domain.getAddress().getInternalNumber(),
-                domain.getAddress().getComplement()
+        entity.setName(domain.getName());
+        entity.setAvatar(domain.getAvatar());
+        entity.setPhoneNumber(domain.getPhoneNumber());
+        entity.setIsActive(domain.getIsActive());
+        // update address
+        mapAddress(domain.getAddress(), entity.getAddress());
+    }
 
-        );
+    private void mapAddress(Address domainAddress, AddressEntity entityAddress) {
+        entityAddress.setStreet(domainAddress.getStreet());
+        entityAddress.setStateOrProvince(domainAddress.getStateOrProvince());
+        entityAddress.setMunicipalityOrDelegation(domainAddress.getMunicipalityOrDelegation());
+        entityAddress.setCountry(domainAddress.getCountry());
+        entityAddress.setCity(domainAddress.getCity());
+        entityAddress.setZipCode(domainAddress.getZipCode());
+        entityAddress.setExternalNumber(domainAddress.getExternalNumber());
+        entityAddress.setInternalNumber(domainAddress.getInternalNumber());
+        entityAddress.setComplement(domainAddress.getComplement());
     }
 }

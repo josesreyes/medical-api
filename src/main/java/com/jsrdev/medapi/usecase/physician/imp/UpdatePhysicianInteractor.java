@@ -1,5 +1,6 @@
 package com.jsrdev.medapi.usecase.physician.imp;
 
+import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.domain.exception.EntityNotFoundException;
 import com.jsrdev.medapi.domain.model.physician.Physician;
 import com.jsrdev.medapi.domain.repository.PhysicianRepositoryPort;
@@ -55,7 +56,28 @@ public class UpdatePhysicianInteractor implements UpdatePhysician {
     }
 
     private void applyChanges(Physician physician, UpdatePhysicianRequest update) {
-        physician.update(update);
+        if (update.name() != null) physician.setName(update.name());
+        if (update.avatar() != null) physician.setAvatar(update.avatar());
+        if (update.phoneNumber() != null) physician.setPhoneNumber(PhoneNumber.of(update.phoneNumber()));
+
+        if (update.address() != null) {
+            var addressRequest = update.address();
+            var domainAddress = physician.getAddress();
+
+            if (addressRequest.street() != null) domainAddress.setStreet(addressRequest.street());
+            if (addressRequest.stateOrProvince() != null)
+                domainAddress.setStateOrProvince(addressRequest.stateOrProvince());
+            if (addressRequest.municipalityOrDelegation() != null)
+                domainAddress.setMunicipalityOrDelegation(addressRequest.municipalityOrDelegation());
+            if (addressRequest.country() != null) domainAddress.setCountry(addressRequest.country());
+            if (addressRequest.city() != null) domainAddress.setCity(addressRequest.city());
+            if (addressRequest.zipCode() != null) domainAddress.setZipCode(addressRequest.zipCode());
+            if (addressRequest.externalNumber() != null)
+                domainAddress.setExternalNumber(addressRequest.externalNumber());
+            if (addressRequest.internalNumber() != null)
+                domainAddress.setInternalNumber(addressRequest.internalNumber());
+            if (addressRequest.complement() != null) domainAddress.setComplement(addressRequest.complement());
+        }
     }
 
     private Physician savePhysician(Physician physician) {

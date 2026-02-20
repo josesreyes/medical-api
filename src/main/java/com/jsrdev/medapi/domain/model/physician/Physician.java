@@ -4,16 +4,22 @@ import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.domain.exception.InvalidPhysicianDataException;
 import com.jsrdev.medapi.domain.model.address.Address;
-import com.jsrdev.medapi.infrastructure.rest.physician.UpdatePhysicianRequest;
+import jakarta.validation.ValidationException;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
+@Getter
 public final class Physician {
     UUID uuid;
+    @Setter
     String name;
+    @Setter
     String avatar;
     Email email;
     String document;
+    @Setter
     PhoneNumber phoneNumber;
     Specialty specialty;
     Boolean isActive;
@@ -45,48 +51,16 @@ public final class Physician {
         this.address = address;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public void deactivate() {
+        this.isActive = false;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public Email getEmail() {
-        return email;
-    }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public PhoneNumber getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public Specialty getSpecialty() {
-        return specialty;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void update(UpdatePhysicianRequest update) {
-        if (update.name() != null) this.name = update.name();
-        if (update.avatar() != null) this.avatar = update.avatar();
-        if (update.phoneNumber() != null) this.phoneNumber = PhoneNumber.of(update.phoneNumber());
-        if (update.address() != null) {
-            this.address.update(update.address());
+    public void activate() {
+        if (isActive /*== PhysicianStatus.ACTIVE*/) {
+            throw new ValidationException("Already active");
         }
+
+        this.isActive = true;
+        //this.status = PhysicianStatus.ACTIVE;
     }
 }
