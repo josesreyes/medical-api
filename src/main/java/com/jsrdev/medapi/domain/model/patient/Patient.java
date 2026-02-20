@@ -44,4 +44,8 @@ public final class Patient {
         this.isActive = isActive;
         this.address = address;
     }
+
+    public void deactivate() {
+        this.isActive = false;
+    }
 }

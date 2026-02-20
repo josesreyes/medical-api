@@ -53,7 +53,7 @@ public class PatientRepositoryAdapter implements PatientRepositoryPort {
 
     @Override
     public Optional<Patient> findById(UUID id) {
-        return patientRepository.findByIdAndIsActiveTrue(id)
+        return patientRepository.findById(id)
                 .map(PatientMapper::fromPatientEntityToPatient);
     }
 

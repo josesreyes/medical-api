@@ -53,7 +53,7 @@ public class UpdatePatientInteractor implements UpdatePatient {
 
     private void ensurePatientIsActive(Patient patient) {
         if (!patient.getIsActive()) {
-            throw new ValidationException("Inactive physicians cannot be updated");
+            throw new ValidationException("Inactive patients cannot be updated");
         }
     }
 
