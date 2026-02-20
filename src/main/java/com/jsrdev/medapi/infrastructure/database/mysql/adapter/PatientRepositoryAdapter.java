@@ -2,8 +2,11 @@ package com.jsrdev.medapi.infrastructure.database.mysql.adapter;
 
 import com.jsrdev.medapi.domain.common.Email;
 import com.jsrdev.medapi.domain.common.PhoneNumber;
+import com.jsrdev.medapi.domain.exception.EntityNotFoundException;
+import com.jsrdev.medapi.domain.model.address.Address;
 import com.jsrdev.medapi.domain.model.patient.Patient;
 import com.jsrdev.medapi.domain.repository.PatientRepositoryPort;
+import com.jsrdev.medapi.infrastructure.database.mysql.entity.AddressEntity;
 import com.jsrdev.medapi.infrastructure.database.mysql.entity.PatientEntity;
 import com.jsrdev.medapi.infrastructure.database.mysql.mapper.PatientMapper;
 import com.jsrdev.medapi.infrastructure.database.mysql.repository.PatientRepository;
@@ -50,7 +53,38 @@ public class PatientRepositoryAdapter implements PatientRepositoryPort {
 
     @Override
     public Optional<Patient> findById(UUID id) {
-        return patientRepository.findByIdAndIsActiveTrue(id)
+        return patientRepository.findById(id)
                 .map(PatientMapper::fromPatientEntityToPatient);
+    }
+
+    @Override
+    public Patient update(Patient patient) {
+        PatientEntity entity = patientRepository.findById(patient.getUuid())
+                .orElseThrow(() -> new EntityNotFoundException("Patient not found"));
+
+        mapDomainToExistingEntity(patient, entity);
+
+        return PatientMapper.fromPatientEntityToPatient(entity);
+    }
+
+    private void mapDomainToExistingEntity(Patient patient, PatientEntity entity) {
+        entity.setName(patient.getName());
+        entity.setAvatar(patient.getAvatar());
+        entity.setPhoneNumber(patient.getPhoneNumber());
+        entity.setIsActive(patient.getIsActive());
+        // update address
+        mapAddress(patient.getAddress(), entity.getAddress());
+    }
+
+    private void mapAddress(Address domainAddress, AddressEntity entityAddress) {
+        entityAddress.setStreet(domainAddress.getStreet());
+        entityAddress.setStateOrProvince(domainAddress.getStateOrProvince());
+        entityAddress.setMunicipalityOrDelegation(domainAddress.getMunicipalityOrDelegation());
+        entityAddress.setCountry(domainAddress.getCountry());
+        entityAddress.setCity(domainAddress.getCity());
+        entityAddress.setZipCode(domainAddress.getZipCode());
+        entityAddress.setExternalNumber(domainAddress.getExternalNumber());
+        entityAddress.setInternalNumber(domainAddress.getInternalNumber());
+        entityAddress.setComplement(domainAddress.getComplement());
     }
 }

@@ -5,10 +5,7 @@ import com.jsrdev.medapi.domain.common.PhoneNumber;
 import com.jsrdev.medapi.infrastructure.database.mysql.converter.EmailJpaConverter;
 import com.jsrdev.medapi.infrastructure.database.mysql.converter.PhoneNumberJpaConverter;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
@@ -25,15 +22,19 @@ public class PatientEntity {
     @UuidGenerator
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
+    @Setter
     private String name;
+    @Setter
     private String avatar;
     @Convert(converter = EmailJpaConverter.class)
     private Email email;
     @Column(name = "identity_document")
     private String identityDocument;
+    @Setter
     @Convert(converter = PhoneNumberJpaConverter.class)
     @Column(name = "phone_number")
     private PhoneNumber phoneNumber;
+    @Setter
     @Column(name = "is_active")
     private Boolean isActive;
     @Embedded
