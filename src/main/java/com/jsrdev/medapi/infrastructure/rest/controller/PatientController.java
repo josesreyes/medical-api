@@ -12,10 +12,11 @@ import com.jsrdev.medapi.usecase.patient.UpdatePatient;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -30,24 +31,29 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity<PatientResponse> create(
-            @Valid @RequestBody CreatePatientRequest request) {
+            @Valid @RequestBody CreatePatientRequest request,
+            UriComponentsBuilder uriBuilder
+    ) {
 
         Patient patient = PatientDtoMapper.fromPatientRequestToPatient(request);
         Patient created = createPatient.execute(patient);
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(PatientDtoMapper.fromPatientToPatientResponse(created));
+        URI uri = uriBuilder.path("/patients/{id}").buildAndExpand(created.getUuid()).toUri();
+        PatientResponse response = PatientDtoMapper.fromPatientToPatientResponse(created);
+
+        return ResponseEntity.created(uri).body(response);
     }
 
     @GetMapping
-    public Page<PatientResponse> getActivePatients(
+    public ResponseEntity<Page<PatientResponse>> getActivePatients(
             //@PageableDefault(size = 10, sort = {"name"}) Pageable pageable
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        return getActivePatients.getActivePatients(page, size)
+        var responsePage = getActivePatients.getActivePatients(page, size)
                 .map(PatientDtoMapper::fromPatientToPatientResponse);
+
+        return ResponseEntity.ok(responsePage);
     }
 
     @GetMapping("/{id}")

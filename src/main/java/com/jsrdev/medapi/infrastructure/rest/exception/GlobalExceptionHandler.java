@@ -10,10 +10,12 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestControllerAdvice
@@ -66,7 +68,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             InvalidPhysicianDataException.class,
             InvalidAddressDataException.class,
-            ValidationException.class,
             IntegrityValidationException.class,
             ValidationException.class
     })
@@ -80,6 +81,37 @@ public class GlobalExceptionHandler {
                         HttpStatus.BAD_REQUEST.value(),
                         "BUSINESS_VALIDATION_ERROR",
                         List.of(new FieldErrorValidation("", ex.getMessage())),
+                        request.getRequestURI()
+                )
+        );
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiError> handleTypeMismatch(
+            MethodArgumentTypeMismatchException ex,
+            HttpServletRequest request
+    ) {
+
+        assert ex.getRequiredType() != null;
+        String message = String.format(
+                "Parameter '%s' must be of type %s",
+                ex.getName(),
+                ex.getRequiredType().getSimpleName()
+        );
+
+        if (ex.getRequiredType() != null && ex.getRequiredType().equals(UUID.class)) {
+            message = "Invalid UUID format";
+        }
+
+        return ResponseEntity.badRequest().body(
+                new ApiError(
+                        LocalDateTime.now(),
+                        HttpStatus.BAD_REQUEST.value(),
+                        "INVALID_PARAMETER",
+                        List.of(new FieldErrorValidation(
+                                ex.getName(),
+                                message
+                        )),
                         request.getRequestURI()
                 )
         );
@@ -123,6 +155,8 @@ public class GlobalExceptionHandler {
                 )
         );
     }
+
+
 
     /* ===================== 401 UNAUTHORIZED ===================== */
 /*
