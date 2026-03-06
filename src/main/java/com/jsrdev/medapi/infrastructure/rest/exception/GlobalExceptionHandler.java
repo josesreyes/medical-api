@@ -7,6 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -159,8 +162,11 @@ public class GlobalExceptionHandler {
 
 
     /* ===================== 401 UNAUTHORIZED ===================== */
-/*
-    @ExceptionHandler({ BadCredentialsException.class, AuthenticationException.class })
+    @ExceptionHandler({
+            BadCredentialsException.class,
+            UsernameNotFoundException.class,
+            AuthenticationException.class
+    })
     public ResponseEntity<ApiError> handleAuthentication(
             HttpServletRequest request
     ) {
@@ -169,11 +175,11 @@ public class GlobalExceptionHandler {
                         LocalDateTime.now(),
                         HttpStatus.UNAUTHORIZED.value(),
                         "UNAUTHORIZED",
-                        List.of(new FieldErrorValidation("", "Authentication failed")),
+                        List.of(new FieldErrorValidation("", "Invalid login or password")),
                         request.getRequestURI()
                 )
         );
-    }*/
+    }
 
     /* ===================== 403 FORBIDDEN ===================== */
     @ExceptionHandler(AccessDeniedException.class)
