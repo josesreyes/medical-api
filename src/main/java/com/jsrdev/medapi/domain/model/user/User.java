@@ -10,8 +10,26 @@ import java.util.UUID;
 public class User {
     private UUID id;
     private String name;
-    private String email;
+    private String login;
     private String password;
     private Boolean active;
     private List<Profile> profiles;
+
+    public User(UUID id, String name, String login, String password, Boolean active, List<Profile> profiles) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.active = active;
+        this.profiles = profiles;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public boolean hasProfile(String profileName) {
+        return profiles.stream()
+                .anyMatch(p -> p.getName().equals(profileName));
+    }
 }

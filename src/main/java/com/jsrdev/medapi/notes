@@ -76,3 +76,6 @@ cuando usar cada tipo de error:
 | `BadCredentialsException`         | Login incorrecto            |
 | `AccessDeniedException`           | Rol insuficiente            |
 | `Exception`                       | Error inesperado (fallback) |
+
+
+DELETE FROM flyway_schema_history WHERE version = '7';
