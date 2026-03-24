@@ -9,9 +9,8 @@ import java.time.LocalDateTime;
 public class AppointmentDtoMapper {
     public static Appointment toDomain(Physician physician, Patient patient, LocalDateTime date) {
         return new Appointment(
-                null,
-                physician,
-                patient,
+                physician.getUuid(),
+                patient.getUuid(),
                 date
         );
     }

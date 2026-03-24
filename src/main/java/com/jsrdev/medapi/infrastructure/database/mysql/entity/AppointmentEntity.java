@@ -1,5 +1,7 @@
-import com.jsrdev.medapi.domain.model.patient.Patient;
-import com.jsrdev.medapi.domain.model.physician.Physician;
+package com.jsrdev.medapi.infrastructure.database.mysql.entity;
+
+import com.jsrdev.medapi.domain.common.AppointmentStatus;
+import com.jsrdev.medapi.domain.common.CancellationReason;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -25,18 +27,22 @@ public class AppointmentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "physician_id")
-    private Physician physician;
+    private PhysicianEntity physician;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id")
-    private Patient patient;
+    private PatientEntity patient;
 
     private LocalDateTime date;
 
-    //@Column(name = "cancellation_reason")
-    //@Enumerated(EnumType.STRING)
-    //private CancellationReason cancellationReason;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status;
 
-    // @Column(name = "cancellation_date")
-    //private LocalDateTime cancellationDate;
+    @Column(name = "cancellation_reason")
+    @Enumerated(EnumType.STRING)
+    private CancellationReason cancellationReason;
+
+    @Column(name = "cancellation_date")
+    private LocalDateTime cancellationDate;
 }
